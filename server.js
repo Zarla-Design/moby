@@ -10,12 +10,19 @@ app.use('/', express.static('public'))
 app.set('view engine', 'pug')
 
 app.get('/', function (req, res) {
-  res.render('index')
+  res.send({
+    ok: 'ok'
+  })
 })
 
-app.get('/search', function (req, res) {
-  res.render('search', {
-    q: req.query.q,
+app.get('/healthz', function (req, res) {
+  res.send({
+    ok: 'ok'
+  })
+})
+
+app.get('/q', function (req, res) {
+  res.send({
     searchResults: moby.search(req.query.q),
     reverseSearchResults: moby.reverseSearch(req.query.q)
   })
